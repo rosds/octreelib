@@ -1,0 +1,30 @@
+<package>
+  <description brief="octreelib">
+
+     The octreelib contains an octree implementation that is templated for coordinate and value type. 
+     It features fast sampling and value aggregation on many resolutions in parallel.
+     The implementation is specifically suited for fast volume queries of integral or extremum values.
+
+  </description>
+  <author>Joerg Stueckler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/octreelib</url>
+  <depend package="roscpp" />
+  <depend package="pcl" />
+  <depend package="pcl_ros" />
+  <depend package="sensor_msgs" />
+  <depend package="visualization_msgs" />
+  <depend package="eigen" />
+  <depend package="dynamic_reconfigure" />
+  <depend package="nodelet" />
+  <depend package="terminal_tools" />
+  
+  <export>
+    <cpp cflags="-I${prefix}/include -I${prefix}/src -I${prefix}/cfg/cpp" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib"/>
+    <nodelet plugin="${prefix}/nodelet_plugins.xml" />
+  </export>
+  
+</package>
+
+

@@ -1,0 +1,8 @@
+<library path="lib/liboctreelib_normalestimation_nodelet">
+  <class name="octreelib/NormalEstimationOctree" type="NormalEstimationOctree" base_class_type="nodelet::Nodelet">
+  <description>
+    Nodelet for fast multi-resolution normal estimation with an octree.
+    Author: Joerg Stueckler, University of Bonn, 4/2011
+  </description>
+  </class>
+</library>
