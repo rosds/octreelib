@@ -1,6 +1,6 @@
 /**
-@mainpage
-@htmlinclude manifest.html
+\mainpage
+\htmlinclude manifest.html
 
 
 \section codeapi Code API

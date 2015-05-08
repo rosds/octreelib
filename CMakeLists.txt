@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(OCTREELIB)
+
 
 # ---[ Release/Debug specific flags
 if(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
@@ -52,6 +53,22 @@ set(SOURCES
 
 add_library(octreelib SHARED ${SOURCES})
 
+##
+#   Check if the compiler admits the C++11 standard 
+##
+include(CheckCXXCompilerFlag)
+check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
+check_cxx_compiler_flag("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+if(COMPILER_SUPPORTS_CXX11)
+    set_property(TARGET octreelib APPEND_STRING PROPERTY COMPILE_FLAGS 
+        "-std=c++11 ")
+elseif(COMPILER_SUPPORTS_CXX0X)
+    set_property(TARGET octreelib APPEND_STRING PROPERTY 
+        COMPILE_FLAGS "-std=c++0x")
+else()
+    message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 
+    support. Please use a different C++ compiler.")
+endif() 
 
 
 # configure install target
@@ -88,3 +105,16 @@ configure_file(
 add_custom_target(uninstall
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 
+# Generate documentation (Optional)
+find_package (Doxygen)
+if (DOXYGEN_FOUND)
+    # Fetch Doxygen configuration file
+    configure_file (${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
+        ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+
+    # add 'make doc' directive
+    add_custom_target (doc
+        ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc
+        COMMENT "Generating API documentation" VERBATIM)
+endif (DOXYGEN_FOUND)

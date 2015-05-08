@@ -7,7 +7,7 @@
 # OCTREELIB_DEFINITIONS - Compiler flags for OctreeLib.
 
 find_path(OCTREELIB_INCLUDE_DIR octreelib/spatialaggregate/octree.h
-    HINTS "$ENV{OCTREELIB_ROOT}" "/usr" "/usr/local")
+    HINTS "$ENV{OCTREELIB_ROOT}/include" "/usr" "/usr/local")
 
 find_library(OCTREELIB_LIBRARY NAMES octreelib liboctreelib
     HINTS "$ENV{OCTREELIB_ROOT}/lib" "/usr/lib" "/usr/local/lib")

@@ -37,8 +37,10 @@
 
 #include <octreelib/spatialaggregate/octree.h>
 
+class Dummy {
+    public:
+        Dummy& operator+=(const Dummy& d) {}
+        void initialize() {}
+};
 
-
-
-
-
+template class spatialaggregate::OcTree<float, Dummy>;
