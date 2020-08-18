@@ -15,9 +15,9 @@
  *     copyright notice, this list of conditions and the following
  *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
- *   * Neither the name of University of Bonn, Computer Science Institute 
- *     VI nor the names of its contributors may be used to endorse or 
- *     promote products derived from this software without specific 
+ *   * Neither the name of University of Bonn, Computer Science Institute
+ *     VI nor the names of its contributors may be used to endorse or
+ *     promote products derived from this software without specific
  *     prior written permission.
  *
  *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -38,9 +38,12 @@
 #include <octreelib/spatialaggregate/octree.h>
 
 class Dummy {
-    public:
-        Dummy& operator+=(const Dummy& d) {}
-        void initialize() {}
+ public:
+  Dummy& operator+=(const Dummy&) {
+    static Dummy d;
+    return d;
+  }
+  void initialize() {}
 };
 
 template class spatialaggregate::OcTree<float, Dummy>;
